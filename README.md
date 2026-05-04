@@ -1,116 +1,207 @@
-# HENCY BUCHIYA — Fashion Designer Portfolio
-
 <div align="center">
 
+<!-- Hero Banner -->
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0A0A0A&height=200&section=header&text=HENCY%20BUCHIYA&fontSize=60&fontColor=F7F5F2&fontAlignY=38&desc=Fashion%20Designer%20%C2%B7%20Ahmedabad%2C%20India&descAlignY=58&descSize=16&descColor=C9A96E&animation=fadeIn&fontFamily=serif" />
+
+<br/>
+
 ```
-H E N C Y
-      B U C H I Y A
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✦  C O U T U R E   C R A F T E D   F O R   T H E   E X T R A O R D I N A R Y  ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-*Couture Crafted for the Extraordinary*
+<br/>
 
-[![Live Portfolio](https://img.shields.io/badge/VIEW_PORTFOLIO-0A0A0A?style=for-the-badge&logoColor=white)](https://github.com/kirtan597/H-Portfolio)
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion)
+[![Live Portfolio](https://img.shields.io/badge/◆_VIEW_LIVE_PORTFOLIO-0A0A0A?style=for-the-badge&logoColor=C9A96E)](https://github.com/kirtan597/H-Portfolio)&nbsp;&nbsp;
+[![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev)&nbsp;&nbsp;
+[![Framer](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion)&nbsp;&nbsp;
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+
+<br/>
+
+> *"I don't just design clothes. I design confidence."*
+>
+> **— Hency Buchiya**
+
+<br/>
 
 </div>
 
 ---
 
-## ✦ The Vision
+<div align="center">
 
-> *"I don't just design clothes. I design confidence."*
-> — Hency Buchiya
+## 〔 THE ATELIER 〕
 
-A luxury single-page portfolio for **Hency Buchiya** — a passionate fashion designer from Ahmedabad, India, blending modern couture with traditional embroidery artistry. Built with the editorial aesthetic of *Vogue Italia*, *System Magazine*, and *Central Saint Martins graduate showcases* — oversized display typography, stark black and white contrast, and photography as fine art.
+*A luxury single-page portfolio where fashion meets fine art.*
+*Built with the editorial soul of Vogue Italia, System Magazine,*
+*and Central Saint Martins graduate showcases.*
 
----
-
-## ✦ Aesthetic Direction
-
-```
-Mood Board:
-Irving Penn  ·  Peter Lindbergh  ·  Helmut Newton
-Vogue Italia 1990s  ·  Saint Laurent Editorial  ·  Celine under Hedi Slimane
-
-Palette:
-#FFFFFF  White        #0A0A0A  Ink Black
-#F7F5F2  Off-White    #F0EDE8  Warm Paper
-#C9A96E  Gold (×4)    #888888  Mid Gray
-
-Typography:
-Cormorant Garamond  —  Display, 200–300 weight, editorial
-DM Sans             —  UI, 200–400 weight, minimal
-```
+</div>
 
 ---
 
-## ✦ Sections
+## ✦ Mood Board
 
-| # | Section | Highlight |
-|---|---------|-----------|
-| 01 | **Hero** | Oversized editorial name · Typewriter skills · Dot-grid mouse parallax · Infinite ticker |
-| 02 | **About** | Asymmetric grid · AI fashion portrait · Pull quote · Skill pills |
-| 03 | **Gallery** | Masonry grid · Category filter · Hover color-reveal · Lightbox modal |
-| 04 | **Testimonials** | Full-width card slider · Left/right arrows · AnimatePresence transitions |
-| 05 | **Contact** | EmailJS integration · Floating labels · SVG social icons |
-| — | **Footer** | Off-white editorial layout · HB monogram |
+<div align="center">
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│   REFERENCES                          PALETTE                              │
+│   ─────────────────────────           ──────────────────────────────────   │
+│   Irving Penn                         ████  #FFFFFF  White                 │
+│   Peter Lindbergh                     ████  #F7F5F2  Off-White             │
+│   Helmut Newton                       ████  #F0EDE8  Warm Paper            │
+│   Vogue Italia 1990s                  ████  #0A0A0A  Ink Black             │
+│   Saint Laurent Editorial             ████  #1A1A1A  Charcoal              │
+│   Celine under Hedi Slimane           ████  #888888  Mid Gray              │
+│   Central Saint Martins               ████  #C9A96E  Gold Accent           │
+│                                                                             │
+│   TYPOGRAPHY                          PHILOSOPHY                           │
+│   ─────────────────────────           ──────────────────────────────────   │
+│   Cormorant Garamond                  95% Black & White                    │
+│   Weight: 200–300 · Display           Gold appears only 4× maximum         │
+│   Size: 8vw–16vw · Italic             No rounded corners                   │
+│                                       No drop shadows                      │
+│   DM Sans                             No gradient buttons                  │
+│   Weight: 200–400 · UI                Negative space as design             │
+│   Size: 0.62rem–0.95rem                                                    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+</div>
+
+---
+
+## ✦ The Mannequin — Section by Section
+
+<div align="center">
+
+```
+                    ┌──────────────────────────────────┐
+                    │  ◈  01 / HERO                    │
+                    │  Oversized editorial name        │
+                    │  HENCY · BUCHIYA at 13vw         │
+                    │  Typewriter · Dot-grid parallax  │
+                    │  Infinite skills ticker          │
+                    └──────────────────────────────────┘
+                                    │
+                    ┌──────────────────────────────────┐
+                    │  ◈  02 / ABOUT                   │
+                    │  Asymmetric 38/62 grid           │
+                    │  AI fashion portrait             │
+                    │  Pull quote · Skill pills        │
+                    └──────────────────────────────────┘
+                                    │
+                    ┌──────────────────────────────────┐
+                    │  ◈  03 / COLLECTION              │
+                    │  Masonry 3-col grid              │
+                    │  Category filter · Lightbox      │
+                    │  Hover color-reveal cards        │
+                    └──────────────────────────────────┘
+                                    │
+                    ┌──────────────────────────────────┐
+                    │  ◈  04 / TESTIMONIALS            │
+                    │  ← Full-width arrow slider →     │
+                    │  AnimatePresence transitions     │
+                    │  01/03 editorial counter         │
+                    └──────────────────────────────────┘
+                                    │
+                    ┌──────────────────────────────────┐
+                    │  ◈  05 / CONTACT                 │
+                    │  EmailJS live form               │
+                    │  Floating label fields           │
+                    │  SVG social icon grid            │
+                    └──────────────────────────────────┘
+                                    │
+                    ┌──────────────────────────────────┐
+                    │  ◈  FOOTER                       │
+                    │  HB monogram · Off-white         │
+                    │  Editorial two-row layout        │
+                    └──────────────────────────────────┘
+```
+
+</div>
 
 ---
 
 ## ✦ Tech Stack
 
-```bash
-React 18          # Component architecture
-Vite              # Lightning-fast build tool
-Framer Motion     # Animations & page transitions
-Lenis             # Premium smooth scroll
-EmailJS           # Contact form email delivery
-```
+<div align="center">
+
+| Layer | Technology | Purpose |
+|:---:|:---:|:---|
+| ⚛️ | **React 18** | Component architecture & state |
+| ⚡ | **Vite** | Lightning-fast dev & build |
+| 🎞️ | **Framer Motion** | Page animations & transitions |
+| 🌊 | **Lenis** | Premium smooth scroll `duration: 1.4` |
+| 📧 | **EmailJS** | Live contact form delivery |
+| 🔤 | **Cormorant Garamond** | Editorial display typography |
+| 🔤 | **DM Sans** | Clean UI typography |
+
+</div>
 
 ---
 
-## ✦ Key Features
+## ✦ Craft Details
 
-- **Editorial Typography** — Cormorant Garamond at `8vw–16vw`, architectural letterforms
-- **Custom Cursor** — 4px dot + 32px lagging ring, pure CSS
-- **Dot-Grid Hero** — Mouse-follow radial gradient reveal on the hero background
-- **Typewriter** — 15 fashion & embroidery skill phrases cycling with type-on/erase
-- **Infinite Ticker** — Seamless CSS animation with all 15 skill keywords
-- **Gallery Lightbox** — Keyboard navigable, ESC to close, scale animation
-- **Scroll Progress** — 1px vertical gold line filling as you scroll
-- **Lenis Smooth Scroll** — `duration: 1.4`, custom easing curve
-- **EmailJS Contact** — Live form with sending/success/error states
-- **Fully Responsive** — Mobile-first, custom cursor hidden on touch devices
+<div align="center">
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         SIGNATURE FEATURES                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ◆ CUSTOM CURSOR        4px ink dot + 32px lagging ring, 80ms delay        │
+│  ◆ DOT-GRID HERO        Mouse-follow radial gradient reveal                │
+│  ◆ NAME ANIMATION       Clip-reveal y:100%→0 staggered per line            │
+│  ◆ TYPEWRITER           15 skills · type-on 55ms · erase 28ms              │
+│  ◆ INFINITE TICKER      CSS animation · 32s loop · 15 keywords             │
+│  ◆ SCROLL PROGRESS      1px gold vertical line fills on scroll             │
+│  ◆ GALLERY LIGHTBOX     Keyboard nav · ESC close · scale animation         │
+│  ◆ SECTION MARKERS      Black pill badge + Cormorant italic + rule line    │
+│  ◆ MOBILE DRAWER        Slide-in from right · staggered link animation     │
+│  ◆ EMAILJS FORM         Sending / Success ✓ / Error states                 │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+</div>
 
 ---
 
-## ✦ Skills Showcased (Typewriter)
+## ✦ Skills Runway
+
+<div align="center">
 
 ```
-Sketching  ·  Fashion Illustration  ·  Trend Forecasting  ·  Pattern Making
-Textile Knowledge  ·  Fabric Dyeing & Printing  ·  Embroidery Designs  ·  Aari Work
-Adobe Illustrator  ·  Adobe Photoshop  ·  Corel Draw  ·  Fashion Styling
-Team Collaboration  ·  Creative Thinking  ·  Draping
+✦ SKETCHING  ·  FASHION ILLUSTRATION  ·  TREND FORECASTING  ·  PATTERN MAKING
+✦ TEXTILE KNOWLEDGE  ·  FABRIC DYEING & PRINTING  ·  EMBROIDERY DESIGNS
+✦ AARI WORK  ·  ADOBE ILLUSTRATOR  ·  ADOBE PHOTOSHOP  ·  COREL DRAW
+✦ FASHION STYLING  ·  TEAM COLLABORATION  ·  CREATIVE THINKING  ·  DRAPING
 ```
+
+</div>
 
 ---
 
 ## ✦ Getting Started
 
 ```bash
-# Clone the repository
+# Clone the atelier
 git clone https://github.com/kirtan597/H-Portfolio.git
 cd H-Portfolio
 
-# Install dependencies
+# Install the collection
 npm install
 
-# Start development server
+# Open the showroom
 npm run dev
 
-# Build for production
+# Press for production
 npm run build
 ```
 
@@ -119,51 +210,91 @@ npm run build
 ## ✦ Project Structure
 
 ```
-src/
-├── components/
-│   ├── Cursor.jsx          # Custom dot + ring cursor
-│   ├── Navbar.jsx          # Fixed frosted nav + slide drawer
-│   ├── Hero.jsx            # Editorial hero + typewriter + ticker
-│   ├── About.jsx           # Asymmetric split layout
-│   ├── Gallery.jsx         # Masonry grid + lightbox
-│   ├── GalleryCard.jsx     # Hover color-reveal card
-│   ├── Lightbox.jsx        # Fullscreen modal
-│   ├── Testimonials.jsx    # Arrow slider + AnimatePresence
-│   ├── Contact.jsx         # EmailJS form + SVG icons
-│   ├── Footer.jsx          # Off-white editorial footer
-│   └── HeroHighlight.jsx   # Dot-grid mouse parallax
-├── hooks/
-│   ├── useLenis.js         # Smooth scroll setup
-│   └── useScrollReveal.js  # Intersection observer animations
-└── styles/
-    └── globals.css         # CSS variables + responsive base
+H-Portfolio/
+│
+├── public/
+│   └── Assest/
+│       ├── ChatGPT Image ···.png     ← AI fashion portrait
+│       └── DOC-20260430-WA0000..pdf  ← Designer resume
+│
+└── src/
+    ├── components/
+    │   ├── Cursor.jsx          ◆ Custom dot + ring cursor
+    │   ├── Navbar.jsx          ◆ Frosted nav + mobile slide drawer
+    │   ├── Hero.jsx            ◆ Editorial hero + typewriter + ticker
+    │   ├── HeroHighlight.jsx   ◆ Dot-grid mouse parallax background
+    │   ├── About.jsx           ◆ Asymmetric split layout
+    │   ├── Gallery.jsx         ◆ Masonry grid + lightbox
+    │   ├── GalleryCard.jsx     ◆ Hover color-reveal card
+    │   ├── Lightbox.jsx        ◆ Fullscreen modal
+    │   ├── Testimonials.jsx    ◆ Arrow slider + AnimatePresence
+    │   ├── Contact.jsx         ◆ EmailJS form + SVG social icons
+    │   └── Footer.jsx          ◆ Off-white editorial footer
+    ├── hooks/
+    │   ├── useLenis.js         ◆ Smooth scroll setup
+    │   └── useScrollReveal.js  ◆ Intersection observer animations
+    └── styles/
+        └── globals.css         ◆ CSS variables + responsive base
 ```
+
+---
+
+## ✦ The Standard
+
+<div align="center">
+
+```
+When a visitor lands on this page the immediate feeling must be:
+
+  "This is a serious designer.
+   This work is gallery-quality.
+   I am looking at a luxury brand."
+
+That is the only acceptable outcome.
+```
+
+</div>
 
 ---
 
 ## ✦ Designer
 
-**Hency Buchiya** — Fashion Designer · Ahmedabad, Gujarat, India
+<div align="center">
 
-Specializing in bridal couture, designer sarees, embroidery work (Zardozi, Aari, Chikankari), and bespoke tailoring. Every garment is measured precisely, handcrafted carefully, and finished beautifully.
+**HENCY BUCHIYA**
+*Fashion Designer · Ahmedabad, Gujarat, India*
 
-[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/designs_by_hency/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hency-buchiya-40203a3a2/)
-[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/919316946138)
+Specializing in bridal couture, designer sarees, embroidery work
+*(Zardozi · Aari · Chikankari)* and bespoke tailoring.
+Every garment is measured precisely, handcrafted carefully, and finished beautifully.
+
+<br/>
+
+[![Instagram](https://img.shields.io/badge/INSTAGRAM-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/designs_by_hency/)&nbsp;
+[![LinkedIn](https://img.shields.io/badge/LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hency-buchiya-40203a3a2/)&nbsp;
+[![WhatsApp](https://img.shields.io/badge/WHATSAPP-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/919316946138)&nbsp;
+[![Email](https://img.shields.io/badge/EMAIL-0A0A0A?style=for-the-badge&logo=gmail&logoColor=white)](mailto:hencybuchiya3539@gmail.com)
+
+</div>
 
 ---
 
 ## ✦ Developer
 
-**Kirtan** — Built with precision. Deployed with confidence.
+<div align="center">
 
-[![GitHub](https://img.shields.io/badge/GitHub-kirtan597-0A0A0A?style=flat-square&logo=github)](https://github.com/kirtan597)
+**KIRTAN**
+*Built with precision. Deployed with confidence.*
+
+[![GitHub](https://img.shields.io/badge/GitHub-kirtan597-0A0A0A?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kirtan597)
+
+</div>
 
 ---
 
 <div align="center">
 
-*Designed with precision. Worn with confidence.*
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0A0A0A&height=120&section=footer&text=Designed%20with%20precision.%20Worn%20with%20confidence.&fontSize=14&fontColor=C9A96E&fontAlignY=65&animation=fadeIn&fontFamily=serif" />
 
 **© 2025 Hency Buchiya. All rights reserved.**
 
