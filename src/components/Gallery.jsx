@@ -7,20 +7,20 @@ import useScrollReveal from '../hooks/useScrollReveal'
 const categories = ['ALL', 'BRIDAL', 'SAREE', 'PARTY WEAR', 'DESIGNER', 'CASUAL', 'SIGNATURE']
 
 const items = [
-  { id: 1,  src: '/Assest/1000233281.jpg.jpeg',                    name: 'Signature Drape',            category: 'SIGNATURE', tall: true  },
-  { id: 2,  src: '/Assest/1000235808.jpg.jpeg',                    name: 'Couture Edit',               category: 'DESIGNER',  tall: false },
-  { id: 3,  src: '/Assest/1000280627.jpg.jpeg',                    name: 'Bridal Ensemble',            category: 'BRIDAL',    tall: true  },
-  { id: 4,  src: '/Assest/1000280629.jpg.jpeg',                    name: 'Embroidered Lehenga',        category: 'BRIDAL',    tall: false },
-  { id: 5,  src: '/Assest/1000280640.jpg.jpeg',                    name: 'Designer Saree',             category: 'SAREE',     tall: false },
-  { id: 6,  src: '/Assest/1000280643.jpg.jpeg',                    name: 'Party Wear Gown',            category: 'PARTY WEAR',tall: true  },
-  { id: 7,  src: '/Assest/Combos Eembrodiery/1000246715.jpg.jpeg', name: 'Aari Embroidery Work',       category: 'SIGNATURE', tall: false },
-  { id: 8,  src: '/Assest/Combos Eembrodiery/1000259000.jpg.jpeg', name: 'Combo Embroidery Design',    category: 'DESIGNER',  tall: false },
-  { id: 9,  src: '/Assest/Combos Eembrodiery/1000263757.jpg.jpeg', name: 'Zardozi Craft',              category: 'SIGNATURE', tall: true  },
-  { id: 10, src: '/Assest/Combos Eembrodiery/1000284366.png',      name: 'Embroidery Illustration',    category: 'CASUAL',    tall: false },
-  { id: 11, src: '/Assest/Combos Eembrodiery/1000284965.jpg.jpeg', name: 'Textile Painting',           category: 'CASUAL',    tall: false },
-  { id: 12, src: '/Assest/Combos Eembrodiery/1000285369.png',      name: 'Fabric Art',                 category: 'DESIGNER',  tall: false },
-  { id: 13, src: '/Assest/Combos Eembrodiery/1000285370.png',      name: 'Handcrafted Motif',          category: 'SIGNATURE', tall: false },
-  { id: 14, src: '/Assest/Combos Eembrodiery/1000285372.png',      name: 'Couture Embroidery',         category: 'BRIDAL',    tall: true  },
+  { id: 1,  src: '/Assest/1000233281.jpg.jpeg',                         name: 'Signature Outfit',        category: 'SIGNATURE',  tall: true  },
+  { id: 2,  src: '/Assest/1000235808.jpg.jpeg',                         name: 'Designer Wear',           category: 'DESIGNER',   tall: false },
+  { id: 3,  src: '/Assest/1000280627.jpg.jpeg',                         name: 'Bridal Lehenga',          category: 'BRIDAL',     tall: true  },
+  { id: 4,  src: '/Assest/1000280629.jpg.jpeg',                         name: 'Bridal Ensemble',         category: 'BRIDAL',     tall: false },
+  { id: 5,  src: '/Assest/1000280640.jpg.jpeg',                         name: 'Designer Saree',          category: 'SAREE',      tall: false },
+  { id: 6,  src: '/Assest/1000280643.jpg.jpeg',                         name: 'Party Wear',              category: 'PARTY WEAR', tall: true  },
+  { id: 7,  src: '/Assest/Combos%20Eembrodiery/1000246715.jpg.jpeg',    name: 'Aari Embroidery',         category: 'SIGNATURE',  tall: false },
+  { id: 8,  src: '/Assest/Combos%20Eembrodiery/1000259000.jpg.jpeg',    name: 'Combo Embroidery',        category: 'DESIGNER',   tall: false },
+  { id: 9,  src: '/Assest/Combos%20Eembrodiery/1000263757.jpg.jpeg',    name: 'Zardozi Craft',           category: 'SIGNATURE',  tall: true  },
+  { id: 10, src: '/Assest/Combos%20Eembrodiery/1000284366.png',         name: 'Embroidery Illustration', category: 'DESIGNER',   tall: false },
+  { id: 11, src: '/Assest/Combos%20Eembrodiery/1000284965.jpg.jpeg',    name: 'Textile Painting',        category: 'CASUAL',     tall: false },
+  { id: 12, src: '/Assest/Combos%20Eembrodiery/1000285369.png',         name: 'Fabric Art',              category: 'CASUAL',     tall: false },
+  { id: 13, src: '/Assest/Combos%20Eembrodiery/1000285370.png',         name: 'Handcrafted Motif',       category: 'SIGNATURE',  tall: false },
+  { id: 14, src: '/Assest/Combos%20Eembrodiery/1000285372.png',         name: 'Couture Embroidery',      category: 'BRIDAL',     tall: true  },
 ]
 
 export default function Gallery() {
@@ -42,11 +42,18 @@ export default function Gallery() {
   return (
     <section id="gallery" style={{ background: '#fff', padding: '6rem 1.6rem' }}>
       {/* Header */}
-      <div style={{
-        fontFamily: 'DM Sans, sans-serif', fontSize: '0.75rem',
-        fontWeight: 400, letterSpacing: '0.25em', textTransform: 'uppercase',
-        color: '#C9A96E', marginBottom: '2rem',
-      }}>03 / COLLECTION</div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+        <span style={{
+          fontFamily: 'DM Sans, sans-serif', fontSize: '0.62rem',
+          fontWeight: 400, letterSpacing: '0.18em',
+          background: '#0A0A0A', color: '#fff', padding: '0.35rem 0.7rem',
+        }}>03</span>
+        <span style={{
+          fontFamily: 'Cormorant Garamond, serif', fontSize: '1.1rem',
+          fontWeight: 300, fontStyle: 'italic', color: '#0A0A0A', letterSpacing: '0.08em',
+        }}>Collection</span>
+        <span style={{ flex: 1, height: '1px', background: '#DDDDDD' }} />
+      </div>
 
       <div style={{ marginBottom: '4rem' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap' }}>
