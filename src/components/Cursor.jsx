@@ -14,6 +14,21 @@ export default function Cursor() {
       if (dot.current) {
         dot.current.style.transform = `translate(${mouseX - 2}px, ${mouseY - 2}px)`
       }
+
+      // Check if hovering over a gallery card (dark overlay background)
+      const el = document.elementFromPoint(mouseX, mouseY)
+      const onCard = el?.closest('[data-gallery-card]')
+      const color = onCard ? '#fff' : '#0A0A0A'
+      const borderColor = onCard ? 'rgba(255,255,255,0.8)' : '#0A0A0A'
+
+      if (dot.current) {
+        dot.current.style.background = color
+        dot.current.style.mixBlendMode = onCard ? 'difference' : 'normal'
+      }
+      if (ring.current) {
+        ring.current.style.borderColor = borderColor
+        ring.current.style.mixBlendMode = onCard ? 'difference' : 'normal'
+      }
     }
 
     let raf
@@ -40,11 +55,13 @@ export default function Cursor() {
         position: 'fixed', top: 0, left: 0, width: 4, height: 4,
         background: '#0A0A0A', borderRadius: '50%', zIndex: 99999,
         pointerEvents: 'none', willChange: 'transform',
+        transition: 'background 0.2s, border-color 0.2s',
       }} />
       <div ref={ring} style={{
         position: 'fixed', top: 0, left: 0, width: 32, height: 32,
         border: '1px solid #0A0A0A', borderRadius: '50%', zIndex: 99998,
         pointerEvents: 'none', willChange: 'transform',
+        transition: 'border-color 0.2s',
       }} />
     </>
   )

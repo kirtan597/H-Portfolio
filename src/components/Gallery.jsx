@@ -1,47 +1,88 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import GalleryCard from './GalleryCard'
+import { GalleryCard, ComboCard } from './GalleryCard'
 import Lightbox from './Lightbox'
 import useScrollReveal from '../hooks/useScrollReveal'
 
-const categories = ['ALL', 'BRIDAL', 'SAREE', 'PARTY WEAR', 'DESIGNER', 'CASUAL', 'SIGNATURE']
+const categories = ['ALL', 'PAINTINGS', 'BRIDAL', 'SAREE', 'PARTY WEAR', 'DESIGNER', 'CASUAL', 'SIGNATURE']
 
-const items = [
-  { id: 1,  src: '/Assest/1000233281.jpg.jpeg',                         name: 'Signature Outfit',        category: 'SIGNATURE',  tall: true  },
-  { id: 2,  src: '/Assest/1000235808.jpg.jpeg',                         name: 'Designer Wear',           category: 'DESIGNER',   tall: false },
-  { id: 3,  src: '/Assest/1000280627.jpg.jpeg',                         name: 'Bridal Lehenga',          category: 'BRIDAL',     tall: true  },
-  { id: 4,  src: '/Assest/1000280629.jpg.jpeg',                         name: 'Bridal Ensemble',         category: 'BRIDAL',     tall: false },
-  { id: 5,  src: '/Assest/1000280640.jpg.jpeg',                         name: 'Designer Saree',          category: 'SAREE',      tall: false },
-  { id: 6,  src: '/Assest/1000280643.jpg.jpeg',                         name: 'Party Wear',              category: 'PARTY WEAR', tall: true  },
-  { id: 7,  src: '/Assest/Combos%20Eembrodiery/1000246715.jpg.jpeg',    name: 'Aari Embroidery',         category: 'SIGNATURE',  tall: false },
-  { id: 8,  src: '/Assest/Combos%20Eembrodiery/1000259000.jpg.jpeg',    name: 'Combo Embroidery',        category: 'DESIGNER',   tall: false },
-  { id: 9,  src: '/Assest/Combos%20Eembrodiery/1000263757.jpg.jpeg',    name: 'Zardozi Craft',           category: 'SIGNATURE',  tall: true  },
-  { id: 10, src: '/Assest/Combos%20Eembrodiery/1000284366.png',         name: 'Embroidery Illustration', category: 'DESIGNER',   tall: false },
-  { id: 11, src: '/Assest/Combos%20Eembrodiery/1000284965.jpg.jpeg',    name: 'Textile Painting',        category: 'CASUAL',     tall: false },
-  { id: 12, src: '/Assest/Combos%20Eembrodiery/1000285369.png',         name: 'Fabric Art',              category: 'CASUAL',     tall: false },
-  { id: 13, src: '/Assest/Combos%20Eembrodiery/1000285370.png',         name: 'Handcrafted Motif',       category: 'SIGNATURE',  tall: false },
-  { id: 14, src: '/Assest/Combos%20Eembrodiery/1000285372.png',         name: 'Couture Embroidery',      category: 'BRIDAL',     tall: true  },
+const singleItems = [
+  // Paintings — 1:1 fixed frame, shown first
+  { id: 1, src: '/Assest/Paintings/1000285385.jpg.jpeg', name: 'Fashion Painting I',  category: 'PAINTINGS' },
+  { id: 2, src: '/Assest/Paintings/1000285386.jpg.jpeg', name: 'Fashion Painting II', category: 'PAINTINGS' },
+  // Outfits
+  { id: 3, src: '/Assest/1000233281.jpg.jpeg', name: 'Signature Outfit', category: 'SIGNATURE'  },
+  { id: 4, src: '/Assest/1000235808.jpg.jpeg', name: 'Designer Wear',    category: 'DESIGNER'   },
+  { id: 5, src: '/Assest/1000280627.jpg.jpeg', name: 'Bridal Lehenga',   category: 'BRIDAL'     },
+  { id: 6, src: '/Assest/1000280629.jpg.jpeg', name: 'Bridal Ensemble',  category: 'BRIDAL'     },
+  { id: 7, src: '/Assest/1000280640.jpg.jpeg', name: 'Designer Saree',   category: 'SAREE'      },
+  { id: 8, src: '/Assest/1000280643.jpg.jpeg', name: 'Party Wear',       category: 'PARTY WEAR' },
 ]
+
+const comboItems = [
+  {
+    id: 9,
+    src:      '/Assest/Combos%20Eembrodiery/1000246715.jpg.jpeg',
+    name:     'Aari Embroidery Work',
+    srcDress: '/Assest/Combos%20Eembrodiery/1000285369.png',
+    nameDress:'Aari Design on Dress',
+    category: 'SIGNATURE', isCombo: true,
+  },
+  {
+    id: 10,
+    src:      '/Assest/Combos%20Eembrodiery/1000259000.jpg.jpeg',
+    name:     'Combo Embroidery Work',
+    srcDress: '/Assest/Combos%20Eembrodiery/1000285370.png',
+    nameDress:'Combo Design on Costume',
+    category: 'DESIGNER', isCombo: true,
+  },
+  {
+    id: 11,
+    src:      '/Assest/Combos%20Eembrodiery/1000263757.jpg.jpeg',
+    name:     'Zardozi Embroidery Work',
+    srcDress: '/Assest/Combos%20Eembrodiery/1000285372.png',
+    nameDress:'Zardozi Design on Dress',
+    category: 'BRIDAL', isCombo: true,
+  },
+  {
+    id: 12,
+    src:      '/Assest/Combos%20Eembrodiery/1000284366.png',
+    name:     'Embroidery Illustration',
+    srcDress: '/Assest/Combos%20Eembrodiery/1000284965.jpg.jpeg',
+    nameDress:'Textile Painting on Fabric',
+    category: 'CASUAL', isCombo: true,
+  },
+]
+
+const allItems = [...singleItems, ...comboItems]
 
 export default function Gallery() {
   const [active, setActive] = useState('ALL')
   const [lightboxIdx, setLightboxIdx] = useState(null)
+  const [lightboxItems, setLightboxItems] = useState([])
   const { ref, controls } = useScrollReveal()
 
-  const filtered = active === 'ALL' ? items : items.filter(i => i.category === active)
+  const filtered = active === 'ALL'
+    ? allItems
+    : allItems.filter(i => i.category === active)
 
   const openLightbox = (item) => {
-    const idx = filtered.findIndex(i => i.id === item.id)
-    setLightboxIdx(idx)
+    const flat = filtered.map(i => ({ src: i.src, name: i.name }))
+    setLightboxItems(flat)
+    setLightboxIdx(filtered.findIndex(i => i.id === item.id))
   }
 
   const navigate = (dir) => {
-    setLightboxIdx(prev => (prev + dir + filtered.length) % filtered.length)
+    setLightboxIdx(prev => (prev + dir + lightboxItems.length) % lightboxItems.length)
   }
 
+  // Painting cards get square 1:1 frame, others get portrait 3:4
+  const isPainting = (item) => item.category === 'PAINTINGS'
+
   return (
-    <section id="gallery" style={{ background: '#fff', padding: '6rem 1.6rem' }}>
-      {/* Header */}
+    <section id="gallery" style={{ background: '#fff', padding: '8rem 4rem' }}>
+
+      {/* Section marker */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
         <span style={{
           fontFamily: 'DM Sans, sans-serif', fontSize: '0.62rem',
@@ -55,32 +96,33 @@ export default function Gallery() {
         <span style={{ flex: 1, height: '1px', background: '#DDDDDD' }} />
       </div>
 
-      <div style={{ marginBottom: '4rem' }}>
+      {/* Heading */}
+      <div style={{ marginBottom: '3rem' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap' }}>
           <span style={{
             fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(4rem, 8vw, 8rem)',
-            fontWeight: 300, color: '#0A0A0A', lineHeight: 0.88,
-            letterSpacing: '-0.03em',
+            fontWeight: 300, color: '#0A0A0A', lineHeight: 0.88, letterSpacing: '-0.03em',
           }}>The</span>
           <span style={{
             fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(4rem, 8vw, 8rem)',
             fontWeight: 300, fontStyle: 'italic', color: '#0A0A0A', lineHeight: 0.88,
-            letterSpacing: '-0.03em',
-            marginLeft: 'clamp(2rem, 6vw, 6rem)',
+            letterSpacing: '-0.03em', marginLeft: 'clamp(2rem, 6vw, 6rem)',
           }}>Work</span>
         </div>
         <p style={{
           fontFamily: 'DM Sans, sans-serif', fontSize: '0.95rem',
-          fontWeight: 300, color: '#888', marginTop: '1.5rem',
-          letterSpacing: '0.02em',
+          fontWeight: 300, color: '#888', marginTop: '1.5rem', letterSpacing: '0.02em',
         }}>A curated showcase of couture, craftsmanship, and character.</p>
       </div>
 
       {/* Filter */}
-      <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', marginBottom: '3rem', borderBottom: '1px solid #EBEBEB', paddingBottom: '1.5rem' }} className="gallery-filter">
+      <div className="gallery-filter" style={{
+        display: 'flex', gap: '2rem', flexWrap: 'wrap',
+        marginBottom: '2rem', borderBottom: '1px solid #EBEBEB', paddingBottom: '1.5rem',
+      }}>
         {categories.map(cat => (
           <button key={cat} onClick={() => setActive(cat)} style={{
-            fontFamily: 'DM Sans, sans-serif', fontSize: '0.75rem',
+            fontFamily: 'DM Sans, sans-serif', fontSize: '0.72rem',
             fontWeight: 400, letterSpacing: '0.22em', textTransform: 'uppercase',
             background: 'none', border: 'none',
             color: active === cat ? '#0A0A0A' : '#888',
@@ -90,14 +132,22 @@ export default function Gallery() {
         ))}
       </div>
 
-      {/* Masonry Grid */}
+      {/* Combo hint */}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: '0.5rem',
+        marginBottom: '2.5rem',
+        fontFamily: 'DM Sans, sans-serif', fontSize: '0.6rem',
+        fontWeight: 300, letterSpacing: '0.12em', color: '#AAAAAA',
+      }}>
+        <span>↑ Hover embroidery cards to reveal the design on dress</span>
+      </div>
+
+      {/* Grid */}
       <motion.div ref={ref} initial="hidden" animate={controls}
-        layout
         className="gallery-grid"
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
-          gridAutoRows: '250px',
           gap: '1.5rem',
         }}>
         <AnimatePresence mode="popLayout">
@@ -106,21 +156,27 @@ export default function Gallery() {
               layout
               variants={{
                 hidden: { y: 40, opacity: 0 },
-                visible: { y: 0, opacity: 1, transition: { delay: i * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+                visible: { y: 0, opacity: 1, transition: { delay: i * 0.07, duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
               }}
               initial="hidden"
               animate="visible"
               exit={{ opacity: 0, scale: 0.95 }}
-              style={{ gridRow: item.tall ? 'span 2' : 'span 1' }}
+              style={{
+                // Paintings: square 1:1 | others: portrait 3:4
+                aspectRatio: isPainting(item) ? '1 / 1' : '3 / 4',
+              }}
             >
-              <GalleryCard item={item} onClick={openLightbox} />
+              {item.isCombo
+                ? <ComboCard item={item} onClick={openLightbox} />
+                : <GalleryCard item={item} onClick={openLightbox} isPainting={isPainting(item)} />
+              }
             </motion.div>
           ))}
         </AnimatePresence>
       </motion.div>
 
       <Lightbox
-        items={filtered}
+        items={lightboxItems}
         index={lightboxIdx}
         onClose={() => setLightboxIdx(null)}
         onNav={navigate}
@@ -128,15 +184,15 @@ export default function Gallery() {
 
       <style>{`
         #gallery { padding: 8rem 4rem; }
+        .gallery-grid > div { width: 100%; }
         @media (max-width: 1024px) {
           #gallery { padding: 6rem 2rem !important; }
-          .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; grid-auto-rows: 220px !important; }
+          .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 600px) {
           #gallery { padding: 5rem 1.6rem !important; }
-          .gallery-grid { grid-template-columns: 1fr !important; grid-auto-rows: 280px !important; }
-          .gallery-grid > div { grid-row: span 1 !important; }
-          .gallery-filter { gap: 1rem !important; }
+          .gallery-grid { grid-template-columns: 1fr !important; }
+          .gallery-filter { gap: 0.8rem !important; }
         }
       `}</style>
     </section>
