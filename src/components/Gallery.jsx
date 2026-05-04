@@ -6,53 +6,14 @@ import useScrollReveal from '../hooks/useScrollReveal'
 
 const categories = ['ALL', 'PAINTINGS', 'BRIDAL', 'SAREE', 'PARTY WEAR', 'DESIGNER', 'CASUAL', 'SIGNATURE']
 
+// Regular single items
 const singleItems = [
-  // Paintings — 1:1 fixed frame, shown first
   { id: 1, src: '/Assest/Paintings/1000285385.jpg.jpeg', name: 'Fashion Painting I',  category: 'PAINTINGS' },
   { id: 2, src: '/Assest/Paintings/1000285386.jpg.jpeg', name: 'Fashion Painting II', category: 'PAINTINGS' },
-  // Outfits
-  { id: 3, src: '/Assest/1000233281.jpg.jpeg', name: 'Signature Outfit', category: 'SIGNATURE'  },
-  { id: 4, src: '/Assest/1000235808.jpg.jpeg', name: 'Designer Wear',    category: 'DESIGNER'   },
-  { id: 5, src: '/Assest/1000280627.jpg.jpeg', name: 'Bridal Lehenga',   category: 'BRIDAL'     },
-  { id: 6, src: '/Assest/1000280629.jpg.jpeg', name: 'Bridal Ensemble',  category: 'BRIDAL'     },
-  { id: 7, src: '/Assest/1000280640.jpg.jpeg', name: 'Designer Saree',   category: 'SAREE'      },
-  { id: 8, src: '/Assest/1000280643.jpg.jpeg', name: 'Party Wear',       category: 'PARTY WEAR' },
 ]
 
-const comboItems = [
-  {
-    id: 9,
-    src:      '/Assest/Combos%20Eembrodiery/1000246715.jpg.jpeg',
-    name:     'Aari Embroidery Work',
-    srcDress: '/Assest/Combos%20Eembrodiery/1000285369.png',
-    nameDress:'Aari Design on Dress',
-    category: 'SIGNATURE', isCombo: true,
-  },
-  {
-    id: 10,
-    src:      '/Assest/Combos%20Eembrodiery/1000259000.jpg.jpeg',
-    name:     'Combo Embroidery Work',
-    srcDress: '/Assest/Combos%20Eembrodiery/1000285370.png',
-    nameDress:'Combo Design on Costume',
-    category: 'DESIGNER', isCombo: true,
-  },
-  {
-    id: 11,
-    src:      '/Assest/Combos%20Eembrodiery/1000263757.jpg.jpeg',
-    name:     'Zardozi Embroidery Work',
-    srcDress: '/Assest/Combos%20Eembrodiery/1000285372.png',
-    nameDress:'Zardozi Design on Dress',
-    category: 'BRIDAL', isCombo: true,
-  },
-  {
-    id: 12,
-    src:      '/Assest/Combos%20Eembrodiery/1000284366.png',
-    name:     'Embroidery Illustration',
-    srcDress: '/Assest/Combos%20Eembrodiery/1000284965.jpg.jpeg',
-    nameDress:'Textile Painting on Fabric',
-    category: 'CASUAL', isCombo: true,
-  },
-]
+// Combo dual-slide items: embroidery work + the design on dress
+const comboItems = []
 
 const allItems = [...singleItems, ...comboItems]
 
@@ -67,17 +28,15 @@ export default function Gallery() {
     : allItems.filter(i => i.category === active)
 
   const openLightbox = (item) => {
-    const flat = filtered.map(i => ({ src: i.src, name: i.name }))
-    setLightboxItems(flat)
-    setLightboxIdx(filtered.findIndex(i => i.id === item.id))
+    const flatItems = filtered.map(i => ({ src: i.src, name: i.name }))
+    const idx = filtered.findIndex(i => i.id === item.id)
+    setLightboxItems(flatItems)
+    setLightboxIdx(idx)
   }
 
   const navigate = (dir) => {
     setLightboxIdx(prev => (prev + dir + lightboxItems.length) % lightboxItems.length)
   }
-
-  // Painting cards get square 1:1 frame, others get portrait 3:4
-  const isPainting = (item) => item.category === 'PAINTINGS'
 
   return (
     <section id="gallery" style={{ background: '#fff', padding: '8rem 4rem' }}>
@@ -118,11 +77,11 @@ export default function Gallery() {
       {/* Filter */}
       <div className="gallery-filter" style={{
         display: 'flex', gap: '2rem', flexWrap: 'wrap',
-        marginBottom: '2rem', borderBottom: '1px solid #EBEBEB', paddingBottom: '1.5rem',
+        marginBottom: '3rem', borderBottom: '1px solid #EBEBEB', paddingBottom: '1.5rem',
       }}>
         {categories.map(cat => (
           <button key={cat} onClick={() => setActive(cat)} style={{
-            fontFamily: 'DM Sans, sans-serif', fontSize: '0.72rem',
+            fontFamily: 'DM Sans, sans-serif', fontSize: '0.75rem',
             fontWeight: 400, letterSpacing: '0.22em', textTransform: 'uppercase',
             background: 'none', border: 'none',
             color: active === cat ? '#0A0A0A' : '#888',
@@ -132,17 +91,20 @@ export default function Gallery() {
         ))}
       </div>
 
-      {/* Combo hint */}
+      {/* Combo legend */}
       <div style={{
-        display: 'flex', alignItems: 'center', gap: '0.5rem',
-        marginBottom: '2.5rem',
-        fontFamily: 'DM Sans, sans-serif', fontSize: '0.6rem',
-        fontWeight: 300, letterSpacing: '0.12em', color: '#AAAAAA',
+        display: 'flex', alignItems: 'center', gap: '0.6rem',
+        marginBottom: '2rem',
+        fontFamily: 'DM Sans, sans-serif', fontSize: '0.62rem',
+        fontWeight: 400, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#888',
       }}>
-        <span>↑ Hover embroidery cards to reveal the design on dress</span>
+        <span style={{ background: '#0A0A0A', color: '#fff', padding: '0.2rem 0.5rem' }}>Embroidery</span>
+        <span>/</span>
+        <span style={{ background: '#F0F0F0', color: '#0A0A0A', padding: '0.2rem 0.5rem', border: '1px solid #DDDDDD' }}>Dress</span>
+        <span>— toggle inside combo cards</span>
       </div>
 
-      {/* Grid */}
+      {/* Fixed uniform grid */}
       <motion.div ref={ref} initial="hidden" animate={controls}
         className="gallery-grid"
         style={{
@@ -161,14 +123,10 @@ export default function Gallery() {
               initial="hidden"
               animate="visible"
               exit={{ opacity: 0, scale: 0.95 }}
-              style={{
-                // Paintings: square 1:1 | others: portrait 3:4
-                aspectRatio: isPainting(item) ? '1 / 1' : '3 / 4',
-              }}
             >
               {item.isCombo
                 ? <ComboCard item={item} onClick={openLightbox} />
-                : <GalleryCard item={item} onClick={openLightbox} isPainting={isPainting(item)} />
+                : <GalleryCard item={item} onClick={openLightbox} />
               }
             </motion.div>
           ))}
@@ -183,8 +141,6 @@ export default function Gallery() {
       />
 
       <style>{`
-        #gallery { padding: 8rem 4rem; }
-        .gallery-grid > div { width: 100%; }
         @media (max-width: 1024px) {
           #gallery { padding: 6rem 2rem !important; }
           .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
@@ -192,7 +148,7 @@ export default function Gallery() {
         @media (max-width: 600px) {
           #gallery { padding: 5rem 1.6rem !important; }
           .gallery-grid { grid-template-columns: 1fr !important; }
-          .gallery-filter { gap: 0.8rem !important; }
+          .gallery-filter { gap: 1rem !important; }
         }
       `}</style>
     </section>

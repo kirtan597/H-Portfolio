@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
-// Single image card — fills parent aspect-ratio container fully
-export function GalleryCard({ item, onClick, isPainting }) {
+// Single image card — fixed frame, hover reveals overlay
+export function GalleryCard({ item, onClick }) {
+  const isPainting = item.category === 'PAINTINGS'
   return (
     <motion.div
       onClick={() => onClick(item)}
@@ -11,7 +12,9 @@ export function GalleryCard({ item, onClick, isPainting }) {
       style={{
         position: 'relative', overflow: 'hidden',
         border: '1px solid #EBEBEB', cursor: 'none',
-        width: '100%', height: '100%', background: '#F7F7F7',
+        width: '100%',
+        aspectRatio: isPainting ? '1 / 1' : '3 / 4',
+        background: '#F7F7F7',
       }}
     >
       <motion.img
@@ -19,12 +22,12 @@ export function GalleryCard({ item, onClick, isPainting }) {
         alt={item.name}
         onError={e => { e.currentTarget.style.opacity = '0' }}
         style={{
-          width: '100%', height: '100%', display: 'block',
+          width: '100%', height: '100%',
           objectFit: isPainting ? 'contain' : 'cover',
           objectPosition: 'center',
-          background: isPainting ? '#F7F7F7' : 'transparent',
+          display: 'block',
         }}
-        variants={{ hover: { scale: isPainting ? 1.02 : 1.05 } }}
+        variants={{ hover: { scale: 1.04 } }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       />
 
@@ -35,17 +38,17 @@ export function GalleryCard({ item, onClick, isPainting }) {
         transition={{ duration: 0.35 }}
         style={{
           position: 'absolute', inset: 0,
-          background: 'rgba(10,10,10,0.55)',
+          background: 'rgba(10,10,10,0.58)',
           display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center', gap: '0.4rem',
+          alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
         }}>
         <div style={{
-          fontFamily: 'Cormorant Garamond, serif', fontSize: '1.2rem',
+          fontFamily: 'Cormorant Garamond, serif', fontSize: '1.25rem',
           fontStyle: 'italic', fontWeight: 300, color: '#fff',
           textAlign: 'center', padding: '0 1.2rem',
         }}>{item.name}</div>
         <div style={{
-          fontFamily: 'DM Sans, sans-serif', fontSize: '0.56rem',
+          fontFamily: 'DM Sans, sans-serif', fontSize: '0.58rem',
           fontWeight: 400, letterSpacing: '0.2em', textTransform: 'uppercase',
           color: '#C9A96E',
         }}>{item.category}</div>
@@ -54,7 +57,7 @@ export function GalleryCard({ item, onClick, isPainting }) {
   )
 }
 
-// Dual image card — second image slides up from bottom on hover
+// Dual image card — hover slides second image up from bottom
 export function ComboCard({ item, onClick }) {
   const [hovered, setHovered] = useState(false)
 
@@ -67,10 +70,10 @@ export function ComboCard({ item, onClick }) {
       style={{
         position: 'relative', overflow: 'hidden',
         border: '1px solid #EBEBEB', cursor: 'none',
-        width: '100%', height: '100%', background: '#F7F7F7',
+        width: '100%', aspectRatio: '3 / 4', background: '#F7F7F7',
       }}
     >
-      {/* Dress image — slides up on hover */}
+      {/* Bottom image — dress/costume (slides up on hover) */}
       <img
         src={item.srcDress}
         alt={item.nameDress}
@@ -78,14 +81,15 @@ export function ComboCard({ item, onClick }) {
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%',
-          objectFit: 'cover', objectPosition: 'center',
-          display: 'block', zIndex: 2,
+          objectFit: 'cover', objectPosition: 'center top',
+          display: 'block',
           transform: hovered ? 'translateY(0)' : 'translateY(100%)',
           transition: 'transform 0.65s cubic-bezier(0.16,1,0.3,1)',
+          zIndex: 2,
         }}
       />
 
-      {/* Embroidery image — always visible base */}
+      {/* Top image — embroidery work (always visible) */}
       <img
         src={item.src}
         alt={item.name}
@@ -93,25 +97,27 @@ export function ComboCard({ item, onClick }) {
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%',
-          objectFit: 'cover', objectPosition: 'center',
-          display: 'block', zIndex: 1,
+          objectFit: 'cover', objectPosition: 'center top',
+          display: 'block',
+          zIndex: 1,
           transform: hovered ? 'scale(1.04)' : 'scale(1)',
           transition: 'transform 0.65s cubic-bezier(0.16,1,0.3,1)',
         }}
       />
 
-      {/* Bottom gradient label */}
+      {/* Label at bottom — shows which view */}
       <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 3,
-        padding: '2.5rem 1rem 0.9rem',
-        background: 'linear-gradient(to top, rgba(10,10,10,0.72) 0%, transparent 100%)',
+        position: 'absolute', bottom: 0, left: 0, right: 0,
+        zIndex: 3,
+        padding: '2rem 1rem 0.9rem',
+        background: 'linear-gradient(to top, rgba(10,10,10,0.75) 0%, transparent 100%)',
         display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
+        transition: 'opacity 0.3s',
       }}>
         <div>
           <div style={{
             fontFamily: 'Cormorant Garamond, serif', fontSize: '1.1rem',
             fontStyle: 'italic', fontWeight: 300, color: '#fff',
-            transition: 'opacity 0.3s',
           }}>{hovered ? item.nameDress : item.name}</div>
           <div style={{
             fontFamily: 'DM Sans, sans-serif', fontSize: '0.55rem',
@@ -120,10 +126,13 @@ export function ComboCard({ item, onClick }) {
           }}>{item.category}</div>
         </div>
         <div style={{
-          fontFamily: 'DM Sans, sans-serif', fontSize: '0.5rem',
-          letterSpacing: '0.1em', textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.55)',
-        }}>{hovered ? 'Dress ↑' : 'Hover ↑'}</div>
+          fontFamily: 'DM Sans, sans-serif', fontSize: '0.52rem',
+          fontWeight: 400, letterSpacing: '0.12em', textTransform: 'uppercase',
+          color: 'rgba(255,255,255,0.6)',
+          display: 'flex', alignItems: 'center', gap: '0.3rem',
+        }}>
+          {hovered ? 'Dress ↑' : 'Hover ↑'}
+        </div>
       </div>
     </div>
   )
