@@ -7,18 +7,20 @@ import useScrollReveal from '../hooks/useScrollReveal'
 const categories = ['ALL', 'BRIDAL', 'SAREE', 'PARTY WEAR', 'DESIGNER', 'CASUAL', 'SIGNATURE']
 
 const items = [
-  { id: 1, src: 'https://picsum.photos/seed/bridal1/600/800', name: 'Ivory Bridal Lehenga', category: 'BRIDAL', tall: true },
-  { id: 2, src: 'https://picsum.photos/seed/saree2/600/450', name: 'Silk Banarasi Saree', category: 'SAREE', tall: false },
-  { id: 3, src: 'https://picsum.photos/seed/party3/600/800', name: 'Midnight Gown', category: 'PARTY WEAR', tall: true },
-  { id: 4, src: 'https://picsum.photos/seed/designer4/600/450', name: 'Structured Blazer Set', category: 'DESIGNER', tall: false },
-  { id: 5, src: 'https://picsum.photos/seed/bridal5/600/800', name: 'Crimson Bridal Ensemble', category: 'BRIDAL', tall: false },
-  { id: 6, src: 'https://picsum.photos/seed/casual6/600/450', name: 'Linen Co-ord Set', category: 'CASUAL', tall: false },
-  { id: 7, src: 'https://picsum.photos/seed/signature7/600/800', name: 'The Monochrome Edit', category: 'SIGNATURE', tall: true },
-  { id: 8, src: 'https://picsum.photos/seed/saree8/600/450', name: 'Chanderi Drape', category: 'SAREE', tall: false },
-  { id: 9, src: 'https://picsum.photos/seed/party9/600/800', name: 'Velvet Evening Gown', category: 'PARTY WEAR', tall: false },
-  { id: 10, src: 'https://picsum.photos/seed/designer10/600/450', name: 'Asymmetric Kurta', category: 'DESIGNER', tall: false },
-  { id: 11, src: 'https://picsum.photos/seed/bridal11/600/800', name: 'Pearl Embroidered Lehenga', category: 'BRIDAL', tall: true },
-  { id: 12, src: 'https://picsum.photos/seed/signature12/600/450', name: 'Editorial Black Drape', category: 'SIGNATURE', tall: false },
+  { id: 1,  src: '/Assest/1000233281.jpg.jpeg',                    name: 'Signature Drape',            category: 'SIGNATURE', tall: true  },
+  { id: 2,  src: '/Assest/1000235808.jpg.jpeg',                    name: 'Couture Edit',               category: 'DESIGNER',  tall: false },
+  { id: 3,  src: '/Assest/1000280627.jpg.jpeg',                    name: 'Bridal Ensemble',            category: 'BRIDAL',    tall: true  },
+  { id: 4,  src: '/Assest/1000280629.jpg.jpeg',                    name: 'Embroidered Lehenga',        category: 'BRIDAL',    tall: false },
+  { id: 5,  src: '/Assest/1000280640.jpg.jpeg',                    name: 'Designer Saree',             category: 'SAREE',     tall: false },
+  { id: 6,  src: '/Assest/1000280643.jpg.jpeg',                    name: 'Party Wear Gown',            category: 'PARTY WEAR',tall: true  },
+  { id: 7,  src: '/Assest/Combos Eembrodiery/1000246715.jpg.jpeg', name: 'Aari Embroidery Work',       category: 'SIGNATURE', tall: false },
+  { id: 8,  src: '/Assest/Combos Eembrodiery/1000259000.jpg.jpeg', name: 'Combo Embroidery Design',    category: 'DESIGNER',  tall: false },
+  { id: 9,  src: '/Assest/Combos Eembrodiery/1000263757.jpg.jpeg', name: 'Zardozi Craft',              category: 'SIGNATURE', tall: true  },
+  { id: 10, src: '/Assest/Combos Eembrodiery/1000284366.png',      name: 'Embroidery Illustration',    category: 'CASUAL',    tall: false },
+  { id: 11, src: '/Assest/Combos Eembrodiery/1000284965.jpg.jpeg', name: 'Textile Painting',           category: 'CASUAL',    tall: false },
+  { id: 12, src: '/Assest/Combos Eembrodiery/1000285369.png',      name: 'Fabric Art',                 category: 'DESIGNER',  tall: false },
+  { id: 13, src: '/Assest/Combos Eembrodiery/1000285370.png',      name: 'Handcrafted Motif',          category: 'SIGNATURE', tall: false },
+  { id: 14, src: '/Assest/Combos Eembrodiery/1000285372.png',      name: 'Couture Embroidery',         category: 'BRIDAL',    tall: true  },
 ]
 
 export default function Gallery() {
