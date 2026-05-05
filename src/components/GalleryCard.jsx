@@ -23,6 +23,7 @@ export function GalleryCard({ item, onClick }) {
       <motion.img
         src={item.src}
         alt={item.name}
+        loading="lazy"
         onError={e => { e.currentTarget.style.opacity = '0' }}
         style={{
           width: '100%', height: '100%',
@@ -99,6 +100,7 @@ export function ComboCard({ item, onClick }) {
           key={img.src}
           src={img.src}
           alt={img.label}
+          loading="lazy"
           onError={e => { e.currentTarget.style.opacity = '0' }}
           style={{
             position: 'absolute', inset: 0,

@@ -56,17 +56,19 @@ export default function About() {
                 key={currentImage}
                 src={images[currentImage]}
                 alt={`Hency Buchiya ${currentImage + 1}`}
+                loading="lazy"
                 initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.02 }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 style={{ 
                   width: '100%', 
                   aspectRatio: '1/1.4', 
                   objectFit: 'cover', 
                   objectPosition: 'top center', 
                   filter: 'grayscale(10%)',
-                  display: 'block'
+                  display: 'block',
+                  willChange: 'opacity, transform',
                 }}
               />
             </AnimatePresence>
