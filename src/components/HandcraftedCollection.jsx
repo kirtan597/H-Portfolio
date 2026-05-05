@@ -55,10 +55,10 @@ function ComboSliderCard({ pair, index }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: 'easeOut' }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       style={{
@@ -79,10 +79,11 @@ function ComboSliderCard({ pair, index }) {
         src={current.src}
         alt={current.label}
         loading="lazy"
-        initial={{ opacity: 0, scale: 1.04 }}
+        decoding="async"
+        initial={{ opacity: 0, scale: 1.02 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%',

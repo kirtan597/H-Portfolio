@@ -199,7 +199,7 @@ export default function Hero() {
             <img
               src="/Assest/ChatGPT Image May 3, 2026, 10_23_31 AM.png"
               alt="Hency Buchiya"
-              fetchpriority="high"
+              fetchPriority="high"
               decoding="async"
               style={{
                 width: '100%', 

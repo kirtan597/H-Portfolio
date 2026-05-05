@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import useScrollReveal from '../hooks/useScrollReveal'
 
 const fadeUp = {
-  hidden: { y: 60, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { y: 40, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
 export default function About() {
@@ -57,10 +57,11 @@ export default function About() {
                 src={images[currentImage]}
                 alt={`Hency Buchiya ${currentImage + 1}`}
                 loading="lazy"
-                initial={{ opacity: 0, scale: 1.02 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.02 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                decoding="async"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8, ease: 'easeInOut' }}
                 style={{ 
                   width: '100%', 
                   aspectRatio: '1/1.4', 
@@ -68,7 +69,6 @@ export default function About() {
                   objectPosition: 'top center', 
                   filter: 'grayscale(10%)',
                   display: 'block',
-                  willChange: 'opacity, transform',
                 }}
               />
             </AnimatePresence>

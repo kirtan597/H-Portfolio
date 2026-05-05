@@ -175,12 +175,12 @@ export default function Gallery() {
             <motion.div key={item.id}
               layout
               variants={{
-                hidden: { y: 30, opacity: 0 },
-                visible: { y: 0, opacity: 1, transition: { delay: i * 0.04, duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { delay: i * 0.02, duration: 0.3, ease: 'easeOut' } },
               }}
               initial="hidden"
               animate="visible"
-              exit={{ opacity: 0, scale: 0.96 }}
+              exit={{ opacity: 0 }}
             >
               {item.isCombo
                 ? <ComboCard item={item} onClick={openLightbox} />

@@ -24,6 +24,7 @@ export function GalleryCard({ item, onClick }) {
         src={item.src}
         alt={item.name}
         loading="lazy"
+        decoding="async"
         onError={e => { e.currentTarget.style.opacity = '0' }}
         style={{
           width: '100%', height: '100%',
@@ -31,15 +32,15 @@ export function GalleryCard({ item, onClick }) {
           objectPosition: 'center',
           display: 'block',
         }}
-        variants={{ hover: { scale: 1.04 } }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        variants={{ hover: { scale: 1.03 } }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
       />
 
       {/* Hover overlay */}
       <motion.div
         variants={{ hover: { opacity: 1 } }}
         initial={{ opacity: 0 }}
-        transition={{ duration: 0.35 }}
+        transition={{ duration: 0.25 }}
         style={{
           position: 'absolute', inset: 0,
           background: 'rgba(10,10,10,0.58)',
@@ -101,6 +102,7 @@ export function ComboCard({ item, onClick }) {
           src={img.src}
           alt={img.label}
           loading="lazy"
+          decoding="async"
           onError={e => { e.currentTarget.style.opacity = '0' }}
           style={{
             position: 'absolute', inset: 0,
@@ -108,8 +110,8 @@ export function ComboCard({ item, onClick }) {
             objectFit: 'contain', objectPosition: 'center',
             background: '#F7F7F7', display: 'block',
             opacity: i === slide ? 1 : 0,
-            transform: i === slide ? 'scale(1)' : 'scale(1.03)',
-            transition: 'opacity 0.6s ease, transform 0.6s ease',
+            transform: i === slide ? 'scale(1)' : 'scale(1.02)',
+            transition: 'opacity 0.5s ease, transform 0.5s ease',
             zIndex: i === slide ? 1 : 0,
           }}
         />
