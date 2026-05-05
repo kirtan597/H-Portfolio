@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import './styles/globals.css'
 import useLenis from './hooks/useLenis'
 import Cursor from './components/Cursor'
@@ -12,21 +12,23 @@ import Footer from './components/Footer'
 
 export default function App() {
   useLenis()
-  const [scrollPct, setScrollPct] = useState(0)
+  const progressRef = useRef(null)
 
   useEffect(() => {
     const onScroll = () => {
       const el = document.documentElement
       const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100
-      setScrollPct(pct)
+      if (progressRef.current) {
+        progressRef.current.style.height = `${pct}%`
+      }
     }
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
     <>
-      <div className="scroll-progress" style={{ height: `${scrollPct}%` }} />
+      <div ref={progressRef} className="scroll-progress" />
       <Cursor />
       <Navbar />
       <Hero />

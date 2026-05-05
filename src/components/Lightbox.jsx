@@ -176,13 +176,9 @@ export function ComboLightbox({ duo, onClose }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
-  // Prevent body scroll when lightbox is open
   useEffect(() => {
-    if (duo) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    if (duo) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = ''
     return () => { document.body.style.overflow = '' }
   }, [duo])
 
@@ -194,128 +190,131 @@ export function ComboLightbox({ duo, onClose }) {
           transition={{ duration: 0.2 }}
           onClick={onClose}
           style={{
-            position: 'fixed', inset: 0, background: 'rgba(255,255,255,0.98)',
-            zIndex: 5000, display: 'flex', flexDirection: 'column',
-            alignItems: 'center', justifyContent: 'flex-start',
-            padding: '1rem',
-            overflowY: 'auto',
-            WebkitOverflowScrolling: 'touch',
+            position: 'fixed', inset: 0,
+            background: 'rgba(255,255,255,0.98)',
+            zIndex: 5000,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '3.5rem 2rem 1.5rem',
+            overflow: 'hidden',
           }}
         >
-          {/* Title */}
           <motion.div
-            initial={{ y: -10, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             onClick={e => e.stopPropagation()}
-            style={{ marginBottom: '1.2rem', textAlign: 'center', paddingTop: '2.5rem' }}
-          >
-            <div style={{
-              fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(1.2rem, 4vw, 1.8rem)',
-              fontStyle: 'italic', fontWeight: 300, color: '#0A0A0A',
-            }}>{duo.title}</div>
-            <div style={{
-              fontFamily: 'DM Sans, sans-serif', fontSize: '0.52rem',
-              fontWeight: 400, letterSpacing: '0.22em', textTransform: 'uppercase',
-              color: '#C9A96E', marginTop: '0.4rem',
-            }}>HANDCRAFTED COLLECTION</div>
-          </motion.div>
-
-          {/* Two images side by side */}
-          <motion.div
-            initial={{ scale: 0.97, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.97, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-            onClick={e => e.stopPropagation()}
-            className="combo-lb-row"
             style={{
-              display: 'flex',
-              gap: '1rem',
-              alignItems: 'flex-start',
-              justifyContent: 'center',
               width: '100%',
-              maxWidth: '1000px',
+              maxWidth: '900px',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
             }}
           >
-            {[
-              { src: duo.src1, label: duo.label1 },
-              { src: duo.src2, label: duo.label2 },
-            ].map((img, i) => (
-              <div key={i} style={{
-                flex: '1 1 0',
-                minWidth: 0,
-                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem',
-              }}>
-                <img
-                  src={img.src}
-                  alt={img.label}
-                  loading="lazy"
-                  style={{
-                    width: '100%',
-                    maxHeight: '45vh',
-                    objectFit: 'contain',
-                    objectPosition: 'center',
-                    background: '#F7F7F7',
-                    border: '1px solid #EBEBEB',
-                    willChange: 'transform',
-                  }}
-                />
-                <div style={{
-                  fontFamily: 'DM Sans, sans-serif', fontSize: '0.52rem',
-                  fontWeight: 400, letterSpacing: '0.2em', textTransform: 'uppercase',
-                  color: '#C9A96E', textAlign: 'center',
-                }}>{img.label}</div>
-              </div>
-            ))}
-          </motion.div>
+            {/* Title */}
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <div style={{
+                fontFamily: 'Cormorant Garamond, serif',
+                fontSize: 'clamp(1.3rem, 3vw, 1.9rem)',
+                fontStyle: 'italic', fontWeight: 300, color: '#0A0A0A',
+                lineHeight: 1.1,
+              }}>{duo.title}</div>
+              <div style={{
+                fontFamily: 'DM Sans, sans-serif', fontSize: '0.52rem',
+                fontWeight: 400, letterSpacing: '0.22em', textTransform: 'uppercase',
+                color: '#C9A96E', marginTop: '0.35rem',
+              }}>HANDCRAFTED COLLECTION</div>
+            </div>
 
-          {/* Description panel — shown only when duo.description exists */}
-          {duo.description && (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              onClick={e => e.stopPropagation()}
+            {/* Two images — flex grow to fill available space */}
+            <div
+              className="combo-lb-row"
               style={{
-                width: '100%', maxWidth: '700px',
-                marginTop: '0.8rem',
-                borderTop: '1px solid #EBEBEB',
-                paddingTop: '1rem',
-                textAlign: 'center',
+                display: 'flex',
+                gap: '1rem',
+                flex: '1 1 0',
+                minHeight: 0,
+                alignItems: 'stretch',
               }}
             >
-              <div style={{ width: 35, height: 1, background: '#C9A96E', margin: '0 auto 1rem' }} />
-              <div style={{
-                fontFamily: 'DM Sans, sans-serif', fontSize: '0.82rem',
-                fontWeight: 300, color: '#555', lineHeight: 1.7,
-              }}>
-                {duo.description.split('\n\n').map((para, i) => (
-                  <p key={i} style={{ margin: i > 0 ? '0.8rem 0 0' : 0 }}>{para}</p>
-                ))}
-              </div>
-            </motion.div>
-          )}
+              {[
+                { src: duo.src1, label: duo.label1 },
+                { src: duo.src2, label: duo.label2 },
+              ].map((img, i) => (
+                <div key={i} style={{
+                  flex: '1 1 0',
+                  minWidth: 0,
+                  minHeight: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.5rem',
+                }}>
+                  <img
+                    src={img.src}
+                    alt={img.label}
+                    loading="lazy"
+                    style={{
+                      width: '100%',
+                      flex: '1 1 0',
+                      minHeight: 0,
+                      objectFit: 'contain',
+                      objectPosition: 'center',
+                      background: '#F7F7F7',
+                      border: '1px solid #EBEBEB',
+                      display: 'block',
+                    }}
+                  />
+                  <div style={{
+                    fontFamily: 'DM Sans, sans-serif', fontSize: '0.52rem',
+                    fontWeight: 400, letterSpacing: '0.2em', textTransform: 'uppercase',
+                    color: '#C9A96E', textAlign: 'center', flexShrink: 0,
+                  }}>{img.label}</div>
+                </div>
+              ))}
+            </div>
 
-          {/* Close — no arrows */}
+            {/* Description */}
+            {duo.description && (
+              <div style={{
+                flexShrink: 0,
+                borderTop: '1px solid #EBEBEB',
+                paddingTop: '0.8rem',
+                textAlign: 'center',
+              }}>
+                <div style={{ width: 30, height: 1, background: '#C9A96E', margin: '0 auto 0.7rem' }} />
+                <div style={{
+                  fontFamily: 'DM Sans, sans-serif', fontSize: '0.78rem',
+                  fontWeight: 300, color: '#555', lineHeight: 1.7,
+                }}>
+                  {duo.description.split('\n\n').map((para, i) => (
+                    <p key={i} style={{ margin: i > 0 ? '0.5rem 0 0' : 0 }}>{para}</p>
+                  ))}
+                </div>
+              </div>
+            )}
+          </motion.div>
+
+          {/* Close button */}
           <button onClick={onClose} style={{
             position: 'fixed', top: '1rem', right: '1rem',
             background: '#fff', border: '1px solid #EBEBEB',
             color: '#0A0A0A', fontSize: '1.1rem',
             width: 38, height: 38,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            borderRadius: '50%',
-            cursor: 'pointer',
+            borderRadius: '50%', cursor: 'pointer',
             zIndex: 6000,
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
           }}>✕</button>
 
           <style>{`
-            @media (min-width: 769px) {
-              .combo-lb-row { 
-                gap: 1.5rem !important;
-              }
-              .combo-lb-row img {
-                max-height: 60vh !important;
+            @media (max-width: 600px) {
+              .combo-lb-row {
+                flex-direction: column !important;
               }
             }
           `}</style>

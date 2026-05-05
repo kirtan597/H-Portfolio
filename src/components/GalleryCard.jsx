@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
+// Detect touch device once
+const isTouch = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
+
 /* ─────────────────────────────────────────────
-   Single image card — hover overlay, click opens lightbox
+   Single image card
 ───────────────────────────────────────────── */
 export function GalleryCard({ item, onClick }) {
   const isSquareFrame = item.category === 'PAINTINGS' || item.category === 'WALL DECOR' || item.category === 'SIGNATURE MASTERPIECES'
@@ -18,6 +21,7 @@ export function GalleryCard({ item, onClick }) {
         aspectRatio: isSquareFrame ? '1 / 1' : '3 / 4',
         background: '#F7F7F7',
         boxSizing: 'border-box',
+        contain: 'layout paint',
       }}
     >
       <motion.img
@@ -36,7 +40,7 @@ export function GalleryCard({ item, onClick }) {
         transition={{ duration: 0.5, ease: 'easeOut' }}
       />
 
-      {/* Hover overlay */}
+      {/* Hover overlay — desktop only */}
       <motion.div
         variants={{ hover: { opacity: 1 } }}
         initial={{ opacity: 0 }}
@@ -64,11 +68,12 @@ export function GalleryCard({ item, onClick }) {
 }
 
 /* ─────────────────────────────────────────────
-   Combo card — manual ← → arrows on hover, click opens lightbox
-   No auto-slide. 1:1 square, object-fit:contain (nothing cut)
+   Combo card
+   Desktop: arrows appear on hover
+   Mobile:  arrows always visible, tap to switch
 ───────────────────────────────────────────── */
 export function ComboCard({ item, onClick }) {
-  const [slide,   setSlide]   = useState(0)   // 0 = embroidery, 1 = dress
+  const [slide,   setSlide]   = useState(0)
   const [hovered, setHovered] = useState(false)
 
   const imgs = [
@@ -76,10 +81,11 @@ export function ComboCard({ item, onClick }) {
     { src: item.srcDress, label: 'On Dress'        },
   ]
 
-  const toggle = (e) => {
-    e.stopPropagation()
-    setSlide(s => s === 0 ? 1 : 0)
-  }
+  const goLeft  = (e) => { e.stopPropagation(); setSlide(0) }
+  const goRight = (e) => { e.stopPropagation(); setSlide(1) }
+
+  // On mobile arrows are always shown; on desktop only on hover
+  const showArrows = isTouch || hovered
 
   return (
     <div
@@ -89,13 +95,15 @@ export function ComboCard({ item, onClick }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         position: 'relative', overflow: 'hidden',
-        border: '1px solid #EBEBEB', cursor: 'none',
+        border: '1px solid #EBEBEB',
+        cursor: isTouch ? 'pointer' : 'none',
         width: '100%', aspectRatio: '1 / 1',
         background: '#F7F7F7',
         boxSizing: 'border-box',
+        contain: 'layout paint',
       }}
     >
-      {/* Crossfade images */}
+      {/* Images */}
       {imgs.map((img, i) => (
         <img
           key={img.src}
@@ -110,101 +118,80 @@ export function ComboCard({ item, onClick }) {
             objectFit: 'contain', objectPosition: 'center',
             background: '#F7F7F7', display: 'block',
             opacity: i === slide ? 1 : 0,
-            transform: i === slide ? 'scale(1)' : 'scale(1.02)',
-            transition: 'opacity 0.5s ease, transform 0.5s ease',
+            transition: 'opacity 0.3s ease',
             zIndex: i === slide ? 1 : 0,
           }}
         />
       ))}
 
-      {/* ── Hover overlay with arrows ── */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 4,
-        opacity: hovered ? 1 : 0,
-        transition: 'opacity 0.3s ease',
-        pointerEvents: hovered ? 'auto' : 'none',
-      }}>
-        {/* Dark tint */}
+      {/* ── Desktop: dark overlay on hover ── */}
+      {!isTouch && (
         <div style={{
-          position: 'absolute', inset: 0,
-          background: 'rgba(10,10,10,0.52)',
+          position: 'absolute', inset: 0, zIndex: 3,
+          background: 'rgba(10,10,10,0.45)',
+          opacity: hovered ? 1 : 0,
+          transition: 'opacity 0.25s ease',
+          pointerEvents: 'none',
         }} />
+      )}
 
+      {/* ── Arrows — always on mobile, hover on desktop ── */}
+      <>
         {/* Left arrow */}
         <button
-          onClick={toggle}
+          onClick={goLeft}
           style={{
-            position: 'absolute', left: '0.75rem', top: '50%',
+            position: 'absolute', left: '0.6rem', top: '50%',
             transform: 'translateY(-50%)',
-            background: 'rgba(255,255,255,0.12)',
-            border: '1px solid rgba(255,255,255,0.35)',
-            color: '#fff', width: 36, height: 36, borderRadius: '50%',
-            fontSize: '1rem', display: 'flex', alignItems: 'center',
-            justifyContent: 'center', cursor: 'none',
-            transition: 'background 0.2s',
-            zIndex: 5,
+            width: 36, height: 36, borderRadius: '50%',
+            background: slide === 0
+              ? 'rgba(10,10,10,0.18)'
+              : isTouch ? 'rgba(10,10,10,0.65)' : 'rgba(255,255,255,0.15)',
+            border: isTouch
+              ? '1px solid rgba(255,255,255,0.5)'
+              : '1px solid rgba(255,255,255,0.35)',
+            color: '#fff',
+            fontSize: '0.95rem',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: 6,
+            opacity: showArrows ? 1 : 0,
+            transition: 'opacity 0.2s ease, background 0.2s ease',
+            pointerEvents: showArrows ? 'auto' : 'none',
           }}
-          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
-          onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.12)'}
         >←</button>
 
         {/* Right arrow */}
         <button
-          onClick={toggle}
+          onClick={goRight}
           style={{
-            position: 'absolute', right: '0.75rem', top: '50%',
+            position: 'absolute', right: '0.6rem', top: '50%',
             transform: 'translateY(-50%)',
-            background: 'rgba(255,255,255,0.12)',
-            border: '1px solid rgba(255,255,255,0.35)',
-            color: '#fff', width: 36, height: 36, borderRadius: '50%',
-            fontSize: '1rem', display: 'flex', alignItems: 'center',
-            justifyContent: 'center', cursor: 'none',
-            transition: 'background 0.2s',
-            zIndex: 5,
+            width: 36, height: 36, borderRadius: '50%',
+            background: slide === 1
+              ? 'rgba(10,10,10,0.18)'
+              : isTouch ? 'rgba(10,10,10,0.65)' : 'rgba(255,255,255,0.15)',
+            border: isTouch
+              ? '1px solid rgba(255,255,255,0.5)'
+              : '1px solid rgba(255,255,255,0.35)',
+            color: '#fff',
+            fontSize: '0.95rem',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: 6,
+            opacity: showArrows ? 1 : 0,
+            transition: 'opacity 0.2s ease, background 0.2s ease',
+            pointerEvents: showArrows ? 'auto' : 'none',
           }}
-          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
-          onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.12)'}
         >→</button>
+      </>
 
-        {/* Center label */}
-        <div style={{
-          position: 'absolute', bottom: '1rem', left: 0, right: 0,
-          display: 'flex', flexDirection: 'column',
-          alignItems: 'center', gap: '0.3rem',
-          zIndex: 5,
-        }}>
-          <div style={{
-            fontFamily: 'Cormorant Garamond, serif', fontSize: '1.15rem',
-            fontStyle: 'italic', fontWeight: 300, color: '#fff',
-            textAlign: 'center', padding: '0 3rem',
-          }}>{item.displayName || item.name}</div>
-          <div style={{
-            fontFamily: 'DM Sans, sans-serif', fontSize: '0.52rem',
-            fontWeight: 400, letterSpacing: '0.2em', textTransform: 'uppercase',
-            color: '#C9A96E',
-          }}>{imgs[slide].label}</div>
-
-          {/* Slide dots */}
-          <div style={{ display: 'flex', gap: '5px', marginTop: '0.25rem' }}>
-            {[0, 1].map(i => (
-              <div key={i} style={{
-                width: i === slide ? 18 : 6, height: 5, borderRadius: 3,
-                background: i === slide ? '#C9A96E' : 'rgba(255,255,255,0.4)',
-                transition: 'width 0.3s ease',
-              }} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom bar — visible when NOT hovered */}
+      {/* Bottom bar — label + dots */}
       <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2,
-        padding: '2.2rem 0.9rem 0.75rem',
-        background: 'linear-gradient(to top, rgba(10,10,10,0.65) 0%, transparent 100%)',
+        position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 4,
+        padding: '2rem 0.9rem 0.75rem',
+        background: 'linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 100%)',
         display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
-        opacity: hovered ? 0 : 1,
-        transition: 'opacity 0.3s ease',
         pointerEvents: 'none',
       }}>
         <div>
@@ -218,12 +205,13 @@ export function ComboCard({ item, onClick }) {
             color: '#C9A96E', marginTop: '0.2rem',
           }}>{imgs[slide].label}</div>
         </div>
-        <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+        {/* Dots */}
+        <div style={{ display: 'flex', gap: '5px', alignItems: 'center', paddingBottom: '2px' }}>
           {[0, 1].map(i => (
             <div key={i} style={{
               width: i === slide ? 16 : 5, height: 5, borderRadius: 3,
-              background: i === slide ? '#C9A96E' : 'rgba(255,255,255,0.35)',
-              transition: 'width 0.3s ease',
+              background: i === slide ? '#C9A96E' : 'rgba(255,255,255,0.4)',
+              transition: 'width 0.25s ease',
             }} />
           ))}
         </div>

@@ -71,6 +71,7 @@ function ComboSliderCard({ pair, index }) {
         cursor: 'none',
         flexShrink: 0,
         boxSizing: 'border-box',
+        contain: 'layout paint',
       }}
     >
       {/* ── Active image ── */}

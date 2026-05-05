@@ -255,7 +255,7 @@ export default function Hero() {
           padding: '0.85rem 0', background: 'transparent',
           flexShrink: 0, position: 'relative', zIndex: 1,
         }}>
-        <div style={{
+        <div className="ticker-inner" style={{
           display: 'flex', whiteSpace: 'nowrap',
           animation: 'ticker 32s linear infinite',
         }}>

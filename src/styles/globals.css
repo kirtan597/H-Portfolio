@@ -113,11 +113,27 @@ button { cursor: none; }
 
 /* ── Mobile base ── */
 @media (max-width: 768px) {
-  body { cursor: auto; }
+  body { 
+    cursor: auto;
+    /* Native momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+  }
   a, button { cursor: pointer; }
 
-  /* hide custom cursor rings on touch */
+  /* Hide custom cursor on touch */
   body > div[style*='border-radius: 50%'] { display: none !important; }
+
+  /* Disable heavy animations on mobile */
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.2s !important;
+  }
+
+  /* Re-enable only ticker animation */
+  .ticker-inner * {
+    animation-duration: 32s !important;
+    transition-duration: 0s !important;
+  }
 
   /* section padding */
   section { padding-left: 1.6rem !important; padding-right: 1.6rem !important; }
