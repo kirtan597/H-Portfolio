@@ -190,25 +190,30 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            alignSelf: 'stretch',
-            width: 'clamp(240px, 26vw, 400px)',
+            alignSelf: 'center',
+            width: 'clamp(280px, 30vw, 450px)',
             marginLeft: '4rem',
             position: 'relative',
           }}>
-          <img
-            src="https://picsum.photos/seed/fashion-hero/600/840"
-            alt="Hency Buchiya"
-            style={{
-              width: '100%', height: '100%',
-              objectFit: 'cover', objectPosition: 'top',
-              filter: 'grayscale(15%)', display: 'block',
-            }}
-          />
-          <div style={{
-            position: 'absolute', inset: '8px',
-            border: '1px solid rgba(255,255,255,0.4)',
-            pointerEvents: 'none',
-          }} />
+          <div style={{ position: 'relative', border: '1px solid #0A0A0A' }}>
+            <img
+              src="/Assest/ChatGPT Image May 3, 2026, 10_23_31 AM.png"
+              alt="Hency Buchiya"
+              style={{
+                width: '100%', 
+                aspectRatio: '1/1.4', 
+                objectFit: 'cover', 
+                objectPosition: 'top center',
+                filter: 'grayscale(10%)', 
+                display: 'block',
+              }}
+            />
+            <div style={{
+              position: 'absolute', inset: '8px',
+              border: '1px solid rgba(255,255,255,0.4)',
+              pointerEvents: 'none',
+            }} />
+          </div>
         </motion.div>
 
         {/* BOTTOM-LEFT: stats */}
@@ -295,6 +300,21 @@ export default function Hero() {
             width: 100% !important;
             text-align: center !important;
             padding: 0.9rem 1rem !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-grid {
+            padding: 5rem 1.2rem 0 !important;
+          }
+          .hero-stats {
+            gap: 1.2rem !important;
+            flex-wrap: wrap !important;
+          }
+          .hero-stats > div > div:first-child {
+            font-size: 1.8rem !important;
+          }
+          .hero-stats > div > div:last-child {
+            font-size: 0.55rem !important;
           }
         }
       `}</style>

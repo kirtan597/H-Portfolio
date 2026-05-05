@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import useScrollReveal from '../hooks/useScrollReveal'
 
 const fadeUp = {
@@ -8,6 +9,19 @@ const fadeUp = {
 
 export default function About() {
   const { ref, controls } = useScrollReveal()
+  const [currentImage, setCurrentImage] = useState(0)
+  const images = [
+    `/Assest/about-1.jpeg?v=${Date.now()}`, 
+    `/Assest/about-2.jpeg?v=${Date.now()}`
+  ]
+
+  // Auto-change images every 4.5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev === 0 ? 1 : 0))
+    }, 4500)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section id="about" style={{
@@ -36,18 +50,32 @@ export default function About() {
 
         {/* Image */}
         <motion.div variants={fadeUp} style={{ position: 'relative' }}>
-          <div className="grain" style={{ position: 'relative', border: '1px solid #0A0A0A' }}>
-            <img
-              src="/Assest/ChatGPT Image May 3, 2026, 10_23_31 AM.png"
-              alt="Hency Buchiya"
-              style={{ width: '100%', aspectRatio: '1/1.4', objectFit: 'cover', objectPosition: 'top center', filter: 'grayscale(10%)' }}
-            />
+          <div className="grain" style={{ position: 'relative', border: '1px solid #0A0A0A', overflow: 'hidden' }}>
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentImage}
+                src={images[currentImage]}
+                alt={`Hency Buchiya ${currentImage + 1}`}
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                style={{ 
+                  width: '100%', 
+                  aspectRatio: '1/1.4', 
+                  objectFit: 'cover', 
+                  objectPosition: 'top center', 
+                  filter: 'grayscale(10%)',
+                  display: 'block'
+                }}
+              />
+            </AnimatePresence>
             <div style={{
               position: 'absolute', bottom: 0, left: 0,
               background: '#0A0A0A', padding: '0.5rem 0.8rem',
               fontFamily: 'DM Sans, sans-serif', fontSize: '0.6rem',
               fontWeight: 400, letterSpacing: '0.2em', textTransform: 'uppercase',
-              color: '#C9A96E',
+              color: '#C9A96E', zIndex: 2,
             }}>EST. 2018</div>
           </div>
         </motion.div>
@@ -110,6 +138,10 @@ export default function About() {
           #about { padding: 5rem 1.6rem !important; }
           #about .about-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
           #about .ghost-num { display: none; }
+        }
+        @media (max-width: 480px) {
+          #about { padding: 4rem 1.2rem !important; }
+          #about .about-grid { gap: 2rem !important; }
         }
       `}</style>
     </section>

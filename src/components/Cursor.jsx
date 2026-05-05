@@ -23,11 +23,11 @@ export default function Cursor() {
 
       if (dot.current) {
         dot.current.style.background = color
-        dot.current.style.mixBlendMode = onCard ? 'difference' : 'normal'
+        dot.current.style.mixBlendMode = 'normal'
       }
       if (ring.current) {
         ring.current.style.borderColor = borderColor
-        ring.current.style.mixBlendMode = onCard ? 'difference' : 'normal'
+        ring.current.style.mixBlendMode = 'normal'
       }
     }
 

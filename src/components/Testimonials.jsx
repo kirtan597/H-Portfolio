@@ -33,14 +33,22 @@ export default function Testimonials() {
   }, [paused])
 
   const prev = () => { setPaused(true); setDir(-1); setCurrent(c => (c - 1 + reviews.length) % reviews.length) }
-  const next = () => { setPaused(true); setDir(1); setCurrent(c => (c + 1) % reviews.length) }
+  const next = () => { setPaused(true); setDir(1);  setCurrent(c => (c + 1) % reviews.length) }
 
   const r = reviews[current]
 
+  const arrowStyle = {
+    position: 'absolute', top: '50%', transform: 'translateY(-50%)',
+    zIndex: 10, width: 40, height: 40, borderRadius: '50%',
+    border: '1px solid #DDDDDD', background: '#fff',
+    color: '#0A0A0A', fontSize: '1rem',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    cursor: 'none', transition: 'all 0.25s',
+  }
+
   return (
-    <section id="testimonials" style={{
-      background: '#F7F5F2', padding: '8rem 4rem', overflow: 'hidden',
-    }}>
+    <section id="testimonials" style={{ background: '#F7F5F2', padding: '8rem 4rem', overflow: 'hidden' }}>
+
       {/* Section marker */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '3rem' }}>
         <span style={{
@@ -62,7 +70,8 @@ export default function Testimonials() {
             initial={{ y: '100%' }} whileInView={{ y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            style={{ display: 'flex', alignItems: 'baseline', gap: '2rem', flexWrap: 'wrap' }}>
+            style={{ display: 'flex', alignItems: 'baseline', gap: '2rem', flexWrap: 'wrap' }}
+          >
             <span style={{
               fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(3rem, 6vw, 6.5rem)',
               fontWeight: 300, color: '#0A0A0A', lineHeight: 0.88, letterSpacing: '-0.02em',
@@ -75,27 +84,24 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Slider — arrow left | card | arrow right */}
-      <motion.div ref={ref} initial="hidden" animate={controls}
+      {/* Slider */}
+      <motion.div
+        ref={ref} initial="hidden" animate={controls}
         variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.8 } } }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        style={{ display: 'flex', alignItems: 'stretch', gap: 'clamp(0.4rem, 2vw, 1.5rem)' }}>
-
-        {/* Left arrow */}
-        <button onClick={prev} style={{
-          flexShrink: 0, width: 'clamp(36px, 5vw, 52px)', height: 'auto',
-          border: '1px solid #DDDDDD', background: 'none',
-          color: '#0A0A0A', fontSize: 'clamp(1rem, 2vw, 1.3rem)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          transition: 'all 0.3s', alignSelf: 'stretch',
-        }}
+        style={{ position: 'relative', padding: '0 2.5rem' }}
+      >
+        {/* Left circle arrow */}
+        <button
+          onClick={prev}
+          style={{ ...arrowStyle, left: 0 }}
           onMouseEnter={e => { e.currentTarget.style.background = '#0A0A0A'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = '#0A0A0A' }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#0A0A0A'; e.currentTarget.style.borderColor = '#DDDDDD' }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#0A0A0A'; e.currentTarget.style.borderColor = '#DDDDDD' }}
         >←</button>
 
         {/* Card */}
-        <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
+        <div style={{ overflow: 'hidden' }}>
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div
               key={current}
@@ -107,9 +113,9 @@ export default function Testimonials() {
               style={{
                 background: '#fff', border: '1px solid #E8E5E0',
                 padding: 'clamp(1.8rem, 4vw, 3.5rem) clamp(1.4rem, 4vw, 4rem)',
-              }}>
-
-              {/* Large decorative quote */}
+              }}
+            >
+              {/* Decorative quote */}
               <div style={{
                 fontFamily: 'Cormorant Garamond, serif', fontSize: '6rem',
                 fontWeight: 200, color: '#EBEBEB', lineHeight: 0.7,
@@ -124,7 +130,7 @@ export default function Testimonials() {
                 lineHeight: 1.95, marginBottom: '2.5rem',
               }}>{r.text}</p>
 
-              {/* Divider + author */}
+              {/* Author */}
               <div className="author-row" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.8rem, 2vw, 2rem)', flexWrap: 'wrap' }}>
                 <div style={{ width: '3rem', height: '1px', background: '#0A0A0A', flexShrink: 0 }} />
                 <div>
@@ -141,18 +147,21 @@ export default function Testimonials() {
                 <div className="stars" style={{ marginLeft: 'auto', color: '#0A0A0A', fontSize: '0.85rem', letterSpacing: '0.15em' }}>★★★★★</div>
               </div>
 
-              {/* Counter */}
+              {/* Dot indicators + counter */}
               <div style={{
                 marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid #F0F0F0',
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               }}>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                   {reviews.map((_, i) => (
-                    <button key={i} onClick={() => { setPaused(true); setDir(i > current ? 1 : -1); setCurrent(i) }} style={{
-                      width: i === current ? '2.5rem' : '0.5rem', height: '2px',
-                      background: i === current ? '#0A0A0A' : '#CCCCCC',
-                      border: 'none', transition: 'all 0.4s ease', padding: 0,
-                    }} />
+                    <button key={i}
+                      onClick={() => { setPaused(true); setDir(i > current ? 1 : -1); setCurrent(i) }}
+                      style={{
+                        width: i === current ? '2.5rem' : '0.5rem', height: '2px',
+                        background: i === current ? '#0A0A0A' : '#CCCCCC',
+                        border: 'none', transition: 'all 0.4s ease', padding: 0,
+                      }}
+                    />
                   ))}
                 </div>
                 <span style={{
@@ -164,16 +173,12 @@ export default function Testimonials() {
           </AnimatePresence>
         </div>
 
-        {/* Right arrow */}
-        <button onClick={next} style={{
-          flexShrink: 0, width: 'clamp(36px, 5vw, 52px)',
-          border: '1px solid #DDDDDD', background: 'none',
-          color: '#0A0A0A', fontSize: 'clamp(1rem, 2vw, 1.3rem)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          transition: 'all 0.3s', alignSelf: 'stretch',
-        }}
+        {/* Right circle arrow */}
+        <button
+          onClick={next}
+          style={{ ...arrowStyle, right: 0 }}
           onMouseEnter={e => { e.currentTarget.style.background = '#0A0A0A'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = '#0A0A0A' }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#0A0A0A'; e.currentTarget.style.borderColor = '#DDDDDD' }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#0A0A0A'; e.currentTarget.style.borderColor = '#DDDDDD' }}
         >→</button>
       </motion.div>
 
@@ -186,6 +191,9 @@ export default function Testimonials() {
           #testimonials p { font-size: 1.05rem !important; line-height: 1.85 !important; }
           #testimonials .author-row { flex-direction: column !important; align-items: flex-start !important; gap: 0.5rem !important; }
           #testimonials .stars { margin-left: 0 !important; }
+        }
+        @media (max-width: 480px) {
+          #testimonials { padding: 3.5rem 1rem !important; }
         }
       `}</style>
     </section>
