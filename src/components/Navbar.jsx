@@ -48,11 +48,20 @@ export default function Navbar() {
         transition: 'all 0.4s ease',
       }}>
         <button onClick={() => scrollTo('home')} style={{
-          fontFamily: 'Cormorant Garamond, serif', fontSize: '3rem',
-          fontWeight: 300, fontStyle: 'italic', color: '#0A0A0A',
-          background: 'none', border: 'none',
-          letterSpacing: '0.04em', lineHeight: 1,
-        }}>HB</button>
+          background: 'none', border: 'none', padding: 0,
+          display: 'flex', alignItems: 'center', cursor: 'pointer',
+        }}>
+          <img
+            src="/Assest/header domain logo.jpg"
+            alt="Hency Buchiya"
+            style={{
+              height: '52px',
+              width: 'auto',
+              objectFit: 'contain',
+              display: 'block',
+            }}
+          />
+        </button>
 
         <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}
           className="nav-links">
@@ -106,7 +115,13 @@ export default function Navbar() {
               <span style={{
                 fontFamily: 'Cormorant Garamond, serif', fontSize: '2rem',
                 fontWeight: 300, fontStyle: 'italic', color: '#0A0A0A',
-              }}>HB</span>
+              }}>
+                <img
+                  src="/Assest/header domain logo.jpg"
+                  alt="Hency Buchiya"
+                  style={{ height: '38px', width: 'auto', objectFit: 'contain', display: 'block' }}
+                />
+              </span>
               <button onClick={() => setMenuOpen(false)} style={{
                 background: 'none', border: '1px solid #DDDDDD',
                 width: 36, height: 36, display: 'flex',
