@@ -89,8 +89,8 @@ export default function Hero() {
 
         {/* TOP-LEFT: label */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.7 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
           style={{
             fontFamily: 'Cormorant Garamond, serif', fontSize: '0.95rem',
             fontWeight: 400, letterSpacing: '0.15em',
@@ -107,7 +107,7 @@ export default function Hero() {
           <div style={{ overflow: 'hidden', marginBottom: '-0.5rem' }}>
             <motion.div
               initial={{ y: '100%' }} animate={{ y: 0 }}
-              transition={{ delay: 0.45, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="hero-name"
               style={{
                 fontFamily: 'Cormorant Garamond, serif',
@@ -122,7 +122,7 @@ export default function Hero() {
           <div style={{ overflow: 'hidden', marginBottom: '2rem' }}>
             <motion.div
               initial={{ y: '100%' }} animate={{ y: 0 }}
-              transition={{ delay: 0.6, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="hero-name hero-name-buchiya"
               style={{
                 fontFamily: 'Cormorant Garamond, serif',
@@ -138,7 +138,7 @@ export default function Hero() {
           {/* Typewriter below both names */}
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ delay: 1.0, duration: 0.7 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
             style={{
               padding: '0.8rem 0 0.8rem 0.8rem',
               borderLeft: '2px solid #EBEBEB',
@@ -150,7 +150,7 @@ export default function Hero() {
           {/* Divider */}
           <motion.div
             initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
-            transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             style={{
               height: '1px', background: '#DDDDDD',
               transformOrigin: 'left', marginBottom: '2rem',
@@ -158,8 +158,8 @@ export default function Hero() {
             }} />
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.15, duration: 0.7 }}
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
             className="hero-ctas"
             style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             {['EXPLORE GALLERY', 'MY RESUME'].map((label, i) => (
@@ -187,8 +187,8 @@ export default function Hero() {
         {/* MIDDLE-RIGHT: photo */}
         <motion.div
           className="hero-photo"
-          initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, scale: 1.02 }} animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           style={{
             alignSelf: 'center',
             width: 'clamp(280px, 30vw, 450px)',
@@ -199,6 +199,8 @@ export default function Hero() {
             <img
               src="/Assest/ChatGPT Image May 3, 2026, 10_23_31 AM.png"
               alt="Hency Buchiya"
+              fetchpriority="high"
+              decoding="async"
               style={{
                 width: '100%', 
                 aspectRatio: '1/1.4', 
@@ -219,8 +221,8 @@ export default function Hero() {
         {/* BOTTOM-LEFT: stats */}
         <motion.div
           className="hero-stats"
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.7 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
           style={{
             display: 'flex', gap: '3.5rem', alignItems: 'flex-end',
             paddingBottom: '1.5rem', paddingTop: '2rem',
@@ -247,7 +249,7 @@ export default function Hero() {
       {/* ── Ticker ── */}
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.6 }}
+        transition={{ delay: 0.7, duration: 0.4 }}
         style={{
           borderTop: '1px solid #DDDDDD', overflow: 'hidden',
           padding: '0.85rem 0', background: 'transparent',

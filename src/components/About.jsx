@@ -72,13 +72,6 @@ export default function About() {
                 }}
               />
             </AnimatePresence>
-            <div style={{
-              position: 'absolute', bottom: 0, left: 0,
-              background: '#0A0A0A', padding: '0.5rem 0.8rem',
-              fontFamily: 'DM Sans, sans-serif', fontSize: '0.6rem',
-              fontWeight: 400, letterSpacing: '0.2em', textTransform: 'uppercase',
-              color: '#C9A96E', zIndex: 2,
-            }}>EST. 2018</div>
           </div>
         </motion.div>
 
